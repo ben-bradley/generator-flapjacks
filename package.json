@@ -41,7 +41,6 @@
     }
   },
   "scripts": {
-    "prepublish": "gulp prepublish",
     "test": "mocha -R spec"
   },
   "license": "MIT"
