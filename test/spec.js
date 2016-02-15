@@ -42,6 +42,7 @@ describe('generator-flapjacks', function() {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/app'))
         .withGenerators([
+          [ helpers.createDummyGenerator(), 'flapjacks:public' ],
           [ helpers.createDummyGenerator(), 'flapjacks:module' ],
           [ helpers.createDummyGenerator(), 'flapjacks:route' ],
           [ helpers.createDummyGenerator(), 'flapjacks:handler' ],
@@ -51,13 +52,39 @@ describe('generator-flapjacks', function() {
           name: 'flapjack_test',
           author: 'test_user',
           description: 'a test description',
+          public: true,
           items: 'things'
         })
         .on('end', done);
     });
 
     it('creates files', function () {
-      assert.file([].concat(files.app, files.public, files.routes, files.handlers, files.controllers));
+      assert.file([].concat(files.app, files.routes, files.handlers, files.controllers));
+    });
+  });
+
+  describe(':app without public', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../generators/app'))
+        .withGenerators([
+          [ helpers.createDummyGenerator(), 'flapjacks:public' ],
+          [ helpers.createDummyGenerator(), 'flapjacks:module' ],
+          [ helpers.createDummyGenerator(), 'flapjacks:route' ],
+          [ helpers.createDummyGenerator(), 'flapjacks:handler' ],
+          [ helpers.createDummyGenerator(), 'flapjacks:controller' ]
+        ])
+        .withPrompts({
+          name: 'flapjack_test',
+          author: 'test_user',
+          description: 'a test description',
+          public: false,
+          items: 'things'
+        })
+        .on('end', done);
+    });
+
+    it('creates files', function () {
+      assert.file([].concat(files.app, files.routes, files.handlers, files.controllers));
     });
   });
 
@@ -112,6 +139,18 @@ describe('generator-flapjacks', function() {
 
     it('creates files', function () {
       assert.file([ 'src/controllers/things.js' ]);
+    });
+  });
+
+  describe(':public', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../generators/public'))
+        .withOptions({ skipChecks: true })
+        .on('end', done);
+    });
+
+    it('creates files', function () {
+      assert.file(files.public);
     });
   });
 

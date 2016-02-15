@@ -30,6 +30,8 @@ yo flapjacks
 The `flapjacks` generator makes it possible to template just the components of the app.
 
 ```bash
+yo flapjacks:public # <- creates the src/public folder
+
 yo flapjacks:module # <- creates a route, handler, and controller
 
 yo flapjacks:route # <- creates a new file in the src/routes folder
@@ -41,7 +43,6 @@ yo flapjacks:controller # <- creates a new file in the src/controllers folder
 
 ## TODO
 
-- Add a sub-generator for the `src/public` folder
 - Make the `src/public` base template better
 
 ## Getting To Know Yeoman

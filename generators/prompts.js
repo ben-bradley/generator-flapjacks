@@ -23,6 +23,13 @@ module.exports = function(ctx) {
       default: 'A really super sweet webapp!'
     },
 
+    public: {
+      type: 'confirm',
+      name: 'public',
+      message: 'Should I create a src/public folder?',
+      default: true
+    },
+
     items: {
       type: 'text',
       name: 'items',

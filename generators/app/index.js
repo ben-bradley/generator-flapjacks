@@ -17,7 +17,8 @@ module.exports = yeoman.generators.Base.extend({
       PROMPTS.name,
       PROMPTS.author,
       PROMPTS.description,
-      PROMPTS.items
+      PROMPTS.public,
+      PROMPTS.items,
     ];
 
     this.prompt(prompts, function (props) {
@@ -37,7 +38,7 @@ module.exports = yeoman.generators.Base.extend({
     this.template('_readme.md', 'readme.md', this.props);
     this.template('config/_default.json', 'config/default.json', this.props);
 
-    this.directory('src/public', 'src/public');
+    // this.directory('src/public', 'src/public');
     this.directory('src/routes', 'src/routes');
     this.directory('src/handlers', 'src/handlers');
     this.directory('src/controllers', 'src/controllers');
@@ -51,6 +52,8 @@ module.exports = yeoman.generators.Base.extend({
     };
 
     this.composeWith('flapjacks:module', { options: options });
+    if (this.props.public)
+      this.composeWith('flapjacks:public', { options: options });
   },
 
   install: function () {
