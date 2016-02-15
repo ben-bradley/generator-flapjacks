@@ -5,7 +5,7 @@ var fs = require('fs'),
   chalk = require('chalk'),
   Prompts = require('./prompts');
 
-const flapjacks = chalk.red('flapjacks');
+var flapjacks = chalk.red('flapjacks');
 
 module.exports = {
 
@@ -21,7 +21,7 @@ module.exports = {
   inquire: function (component) {
     var done = this.async(),
       PROMPTS = new Prompts(this);
-      
+
     if (this.options.composed) {
       this.props = this.options.props;
       return done();
