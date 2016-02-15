@@ -4,7 +4,7 @@ var chalk = require('chalk');
 
 var yotils = require('../yotils');
 
-const dir = 'src/handlers';
+var dir = 'src/handlers';
 
 module.exports = yeoman.generators.Base.extend({
 
