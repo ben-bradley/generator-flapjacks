@@ -1,6 +1,6 @@
 # generator-flapjacks [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-> A generator for quickly spinning up Hapi-based, React-powered webapps.
+> A generator for quickly spinning up Hapi-based, React-powered webapps
 
 ## About
 
