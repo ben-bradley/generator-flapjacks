@@ -1,0 +1,17 @@
+{
+  "name": "<%= name %>",
+  "port": 3000,
+  "serverOptions": {
+    "connections": {
+      "routes": {
+        "cors": true
+      }
+    }
+  },
+  "browserGlobals" : {
+    "WEBSOCKET": "ws://localhost:3000",
+    "API": "http://localhost:3000",
+    "NAME": "<%= name %>",
+    "TITLE": "Web App Title"
+  }
+}

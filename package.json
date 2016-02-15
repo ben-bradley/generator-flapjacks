@@ -1,0 +1,47 @@
+{
+  "name": "generator-flapjacks",
+  "version": "0.0.1",
+  "description": "A generator for quickly spinning up Hapi-based, React-powered webapps.",
+  "homepage": "https://github.com/ben-bradley/generator-flapjacks",
+  "author": {
+    "name": "Ben Bradley",
+    "email": "ben@bradleyit.com",
+    "url": "https://github.com/ben-bradley"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "yeoman-generator",
+    "react",
+    "gulp"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.21.1",
+    "chalk": "^1.0.0",
+    "yosay": "^1.0.2"
+  },
+  "devDependencies": {
+    "yeoman-assert": "^2.0.0",
+    "eslint-config-xo-space": "^0.7.0",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-mocha": "^2.0.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-nsp": "^2.1.0"
+  },
+  "eslintConfig": {
+    "extends": "xo-space",
+    "env": {
+      "mocha": true
+    }
+  },
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "test": "mocha -R spec"
+  },
+  "license": "MIT"
+}
