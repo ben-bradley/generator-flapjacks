@@ -3,7 +3,7 @@ var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
-const files = {
+var files = {
   app: [
     '.gitignore',
     '.jshintrc',
