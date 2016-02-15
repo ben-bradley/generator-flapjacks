@@ -14,7 +14,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   inquire: function() {
-    let component = chalk.magenta('controller');
+    var component = chalk.magenta('controller');
 
     yotils.inquire.call(this, component);
   },

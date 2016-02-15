@@ -14,7 +14,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   inquire: function() {
-    let component = chalk.green('handler');
+    var component = chalk.green('handler');
 
     yotils.inquire.call(this, component);
   },

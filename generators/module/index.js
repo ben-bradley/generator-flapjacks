@@ -12,7 +12,7 @@ module.exports = yeoman.generators.Base.extend({
       return true;
     }
 
-    let component = chalk.bgRed('module');
+    var component = chalk.bgRed('module');
 
     yotils.inquire.call(this, component);
   },
