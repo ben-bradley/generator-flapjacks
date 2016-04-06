@@ -20,16 +20,15 @@ var gulp = require('gulp'),
 var PATHS = {
   dist: 'dist',
   srcBase: './src/',
-  srcServerJs: [
-    '!src/{public,public/**}',
-    'src/**/*.js'
-  ],
+  srcServerJs: [ '!src/{public,public/**}', 'src/**/*.js' ],
   srcPublicIndex: [ './src/public/index.js' ],
-  srcPublicJs: [ '!./src/public/index.js', './src/public/*.js' ],
+  srcPublicJs: [ '!./src/public/index.js', './src/public/**/*.js' ],
   srcPublicHtml: [ './src/public/*.html' ],
   srcPublicLess: [ './src/public/*.less' ],
+  srcPublicImages: [ './src/public/images/*' ],
   distPublic: 'dist/public',
-  distServer: [ 'dist/**', '!dist/public' ]
+  distServer: [ 'dist/**', '!dist/public' ],
+  fonts: [ 'node_modules/font-awesome/fonts/*' ]
 };
 
 function _clean(next) {
@@ -42,28 +41,17 @@ function _babel() {
     .pipe(gulp.dest(PATHS.dist));
 }
 
-function _bundle() {
-  var bundler = watchify(browserify(watchify.args));
-
-  bundler.add(PATHS.srcPublicIndex);
-
-  function rebundle() {
-    gutil.log('public js rebundle');
-    return bundler
-      .transform('babelify', { presets: [ 'es2015', 'react' ] })
-      .bundle()
-      .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-      .pipe(source('index.js'))
-      .pipe(buffer())
-      .pipe(sourcemaps.init())
-      .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(PATHS.distPublic));
-  }
-
-  bundler.on('update', rebundle);
-
-  return rebundle();
+function _bundleOnce() {
+  return browserify({ entries: './src/public/index.js', cache: {}, packageCache: {} })
+    .transform('babelify', { presets: [ 'es2015', 'react' ] })
+    .bundle()
+    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .pipe(source('index.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init())
+    .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(PATHS.distPublic));
 }
 
 function _js() {
@@ -76,6 +64,16 @@ function _html() {
     .pipe(gulp.dest(PATHS.dist));
 }
 
+function _fonts() {
+  return gulp.src(PATHS.fonts)
+    .pipe(gulp.dest(PATHS.distPublic + '/fonts'));
+}
+
+function _images() {
+  return gulp.src(PATHS.srcPublicImages)
+    .pipe(gulp.dest(PATHS.distPublic + '/images'));
+}
+
 function _less() {
   return gulp.src(PATHS.srcPublicLess, { base: PATHS.srcBase })
     .pipe(less())
@@ -86,6 +84,7 @@ function _watch() {
   gulp.watch(PATHS.srcServerJs, [ 'babel' ]);
   gulp.watch(PATHS.srcPublicHtml, [ 'html' ]);
   gulp.watch(PATHS.srcPublicLess, [ 'less' ]);
+  gulp.watch(PATHS.srcPublicJs, [ 'bundle' ]);
   gulp.watch(PATHS.distPublic + '/**', livereload.changed);
   livereload.listen();
 }
@@ -100,8 +99,12 @@ function _nodemon() {
   });
 }
 
+function _build() {
+  return runSequence('clean', [ 'babel', 'bundle', 'html', 'fonts', 'images', 'less', 'js' ]);
+}
+
 function _start() {
-  runSequence('clean', [ 'babel', 'bundle', 'html', 'less', 'js' ], 'watch', 'nodemon');
+  return runSequence('clean', [ 'babel', 'bundle', 'html', 'fonts', 'images', 'less', 'js' ], 'watch', 'nodemon');
 }
 
 // TODO: gulp.task('test', _test);
@@ -110,9 +113,13 @@ gulp.task('clean', _clean);
 
 gulp.task('babel', _babel);
 
-gulp.task('bundle', _bundle);
+gulp.task('bundle', _bundleOnce);
 
 gulp.task('html', _html);
+
+gulp.task('fonts', _fonts);
+
+gulp.task('images', _images);
 
 gulp.task('js', _js);
 
@@ -123,5 +130,7 @@ gulp.task('watch', _watch);
 gulp.task('nodemon', _nodemon);
 
 gulp.task('start', _start);
+
+gulp.task('build', _build);
 
 gulp.task('default', _start);
