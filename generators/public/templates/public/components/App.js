@@ -3,14 +3,12 @@
 // Import Libraries
 import React from 'react';
 import { Link } from 'react-router';
-import MUI from 'material-ui';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Nes from 'nes';
-
-const { ThemeManager } = MUI.Styles;
 
 // Import Components
 import Theme from './Theme';
-import AppBar from './AppBar';
+import AppToolbarBar from './AppToolbarBar';
 import Clock from './Clock';
 
 export default class App extends React.Component {
@@ -41,14 +39,14 @@ export default class App extends React.Component {
 
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getMuiTheme(Theme)
+      muiTheme: getMuiTheme(Theme)
     };
   }
 
   render() {
     return (
       <div>
-        <AppBar />
+        <AppToolbarBar />
         <Clock time={this.state.time} />
         <ul>
           <li><Link to="/user/bob" activeClassName="active">Bob</Link></li>

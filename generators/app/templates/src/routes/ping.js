@@ -1,6 +1,7 @@
 'use strict';
 
-import { ping } from '../handlers';
+import handlers from '../handlers';
+const { ping } = handlers;
 
 export default [{
   method: 'get',

@@ -1,6 +1,7 @@
 'use strict';
 
-import { <%= items %> } from '../handlers';
+import handlers from '../handlers';
+const { <%= items %> } = handlers;
 
 export default [{
   method: 'post',

@@ -2,13 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createHistory, useBasename } from 'history';
-import { Router, Route, Link } from 'react-router';
+import { createHistory } from 'history';
+import { Router, useRouterHistory } from 'react-router';
 
 import App from './components/App';
 import User from './components/User';
 
-const History = useBasename(createHistory)({
+const History = useRouterHistory(createHistory)({
   basename: '/' + NAME
 });
 

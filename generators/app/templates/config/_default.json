@@ -12,6 +12,6 @@
     "WEBSOCKET": "ws://localhost:3000",
     "API": "http://localhost:3000",
     "NAME": "<%= name %>",
-    "TITLE": "Web App Title"
+    "TITLE": "Web App Title (set in config/default.json)"
   }
 }

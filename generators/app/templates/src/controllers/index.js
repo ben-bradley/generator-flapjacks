@@ -14,14 +14,8 @@
 
  export default glob.sync(__dirname + '/!(index).js').reduce((controllers, file) => {
    let name = path.basename(file, '.js'),
-     controller = require(file);
+     controller = require(file).default;
 
    controllers[name] = controller;
    return controllers;
  }, {});
-
-// import ping from './ping';
-//
-// export default {
-//   ping
-// };

@@ -1,7 +1,8 @@
 'use strict';
 
 import Boom from 'boom';
-import { <%= items %> } from '../controllers';
+import controllers from '../controllers';
+const { <%= items %> } = controllers;
 
 export default {
   post(request, reply) {
@@ -10,17 +11,23 @@ export default {
       .catch((err) => reply(Boom.badRequest(err)));
   },
   get(request, reply) {
-    <%= items %>.read(request.payload)
+    let { id } = request.params;
+
+    <%= items %>.read(id)
       .then(reply)
       .catch((err) => reply(Boom.badRequest(err)));
   },
   put(request, reply) {
-    <%= items %>.update(request.payload)
+    let { id } = request.params;
+
+    <%= items %>.update(id, request.payload)
       .then(reply)
       .catch((err) => reply(Boom.badRequest(err)));
   },
   delete(request, reply) {
-    <%= items %>.delete(request.payload)
+    let { id } = request.params;
+
+    <%= items %>.delete(id)
       .then(reply)
       .catch((err) => reply(Boom.badRequest(err)));
   }

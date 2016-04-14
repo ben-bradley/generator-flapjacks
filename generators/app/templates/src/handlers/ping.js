@@ -1,7 +1,8 @@
 'use strict';
 
 import Boom from 'boom';
-import { ping } from '../controllers';
+import controllers from '../controllers';
+const { ping } = controllers;
 
 export default {
   get(request, reply) {
