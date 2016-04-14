@@ -2,6 +2,8 @@
 
 > A generator for quickly spinning up Hapi-based, React-powered webapps
 
+__Updated to work with Babel 6!__
+
 ## About
 
 The `flapjacks` generator, sadly, will not generate flapjacks for you.  It will, however, create a framework for building really cool webapps built on top of Hapi and React.

@@ -17,16 +17,8 @@ import path from 'path';
 
 export default glob.sync(__dirname + '/!(index).js').reduce((handlers, file) => {
   let name = path.basename(file, '.js'),
-    handler = require(file);
+    handler = require(file).default;
 
   handlers[name] = handler;
   return handlers;
 }, {});
-
-// import publicHandlers from './public';
-// import ping from './ping';
-//
-// export default {
-//   public: publicHandlers,
-//   ping
-// };

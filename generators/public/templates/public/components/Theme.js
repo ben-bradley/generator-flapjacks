@@ -1,8 +1,8 @@
 'use strict';
 
-import MUI from 'material-ui';
-let { Colors, Spacing } = MUI.Styles;
-let { ColorManipulator } = MUI.Utils;
+import * as Colors from 'material-ui/styles/colors';
+import * as Spacing from 'material-ui/styles/spacing';
+import * as ColorManipulator from 'material-ui/utils/colorManipulator';
 
 export default {
   spacing: Spacing,

@@ -6,16 +6,13 @@ var gulp = require('gulp'),
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
   browserify = require('browserify'),
-  watchify = require('watchify'),
-  reactify = require('reactify'),
   babel = require('gulp-babel'),
   nodemon = require('gulp-nodemon'),
   livereload = require('gulp-livereload'),
   runSequence = require('run-sequence'),
   uglify = require('gulp-uglify'),
   less = require('gulp-less'),
-  rimraf = require('rimraf'),
-  debug = require('debug')('gulpfile');
+  rimraf = require('rimraf');
 
 var PATHS = {
   dist: 'dist',
@@ -37,7 +34,7 @@ function _clean(next) {
 
 function _babel() {
   return gulp.src(PATHS.srcServerJs, { base: PATHS.srcBase })
-    .pipe(babel())
+    .pipe(babel({ presets: [ 'es2015' ] }))
     .pipe(gulp.dest(PATHS.dist));
 }
 
